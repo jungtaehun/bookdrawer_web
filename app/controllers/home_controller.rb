@@ -1,6 +1,8 @@
 require 'net/http'
 require 'nokogiri'
 require "uri"
+require "json"
+
 class HomeController < ApplicationController
   def index
     @drawer_novel = Book.where(type: 1).order("id desc")
@@ -58,10 +60,11 @@ class HomeController < ApplicationController
       http.request(req)
     }
 
+
     xml_doc = Nokogiri::XML(res.body)
-    @mtitle = xml_doc.xpath("//title").inner_text
-    @mauthor = xml_doc.xpath("//author").inner_text
-    @mimg = xml_doc.xpath("//image").inner_text
+    @mtitle = xml_doc.xpath("//item //title")[0].inner_text.delete('<b>').delete('</b>')
+    @mauthor = xml_doc.xpath("//author")[0].inner_text
+    @mimg = xml_doc.xpath("//image")[0].inner_text
 
     
   end
