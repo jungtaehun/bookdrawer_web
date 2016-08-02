@@ -35,26 +35,16 @@ class HomeController < ApplicationController
   end
 
   def search
-    search = Search.new
-    search.title = params[:title]
-    search.author = params[:author]
-    search.isbn = params[:isbn]
+    title = params[:title]
 
-    tmp = "https://openapi.naver.com/v1/search/book_adv.xml?query=#{search.title}"
+    tmp = "https://openapi.naver.com/v1/search/book.xml?query=#{title}"
 
-    unless search.author.nil?
-      tmp << "?d_auth=#{search.author}"
-    end
-
-    unless search.isbn.nil?
-      tmp << "?d_auth=#{search.isbn}"
-    end
 
     uri = URI(URI.encode(tmp))
 
     req = Net::HTTP::Get.new(uri)
-    req['X-Naver-Client-Id'] = "DZaaw4YVOevidOL4rL06"
-    req['X-Naver-Client-Secret'] = "AgZIyTdxqI"
+    req['X-Naver-Client-Id'] = "H3P1aWrhf8qHA_Z97EZU"
+    req['X-Naver-Client-Secret'] = "4IGa91_4SG"
 
     res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') {|http|
       http.request(req)
@@ -62,9 +52,13 @@ class HomeController < ApplicationController
 
 
     xml_doc = Nokogiri::XML(res.body)
-    @mtitle = xml_doc.xpath("//item //title")[0].inner_text.delete('<b>').delete('</b>')
-    @mauthor = xml_doc.xpath("//author")[0].inner_text
-    @mimg = xml_doc.xpath("//image")[0].inner_text
+    @dtest = xml_doc.xpath("//item")
+    @mtitle = xml_doc.xpath("//item //title")
+    # [0].inner_text.delete('<b>').delete('</b>')
+    @mauthor = xml_doc.xpath("//author")
+    # [0].inner_text
+    @mimg = xml_doc.xpath("//image")
+    # [0].inner_text
 
     
   end

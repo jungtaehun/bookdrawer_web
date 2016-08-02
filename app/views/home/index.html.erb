@@ -1,454 +1,195 @@
-<style>
-  html, body {
-    font-family: 'Roboto', 'Helvetica', sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  .mdl-demo .mdl-layout__header-row {
-    padding-left: 40px;
-  }
-  .mdl-demo .mdl-layout.is-small-screen .mdl-layout__header-row h3 {
-    font-size: inherit;
-  }
-  .mdl-demo .mdl-layout__tab-bar-button {
-    display: none;
-  }
-  .mdl-demo .mdl-layout.is-small-screen .mdl-layout__tab-bar .mdl-button {
-    display: none;
-  }
-  .mdl-demo .mdl-layout:not(.is-small-screen) .mdl-layout__tab-bar,
-  .mdl-demo .mdl-layout:not(.is-small-screen) .mdl-layout__tab-bar-container {
-    overflow: visible;
-  }
-  .mdl-demo .mdl-layout__tab-bar-container {
-    height: 64px;
-  }
-  .mdl-demo .mdl-layout__tab-bar {
-    padding: 0;
-    padding-left: 16px;
-    box-sizing: border-box;
-    height: 100%;
-    width: 100%;
-  }
-  .test{
 
-    box-sizing: border-box;
-    padding: 20;
-    height: cover;
-    width: 100%;
-  }
-  .mdl-demo .mdl-layout__tab-bar .mdl-layout__tab {
-    height: 64px;
-    line-height: 64px;
-  }
-  .mdl-demo .mdl-layout__tab-bar .mdl-layout__tab.is-active::after {
-    background-color: white;
-    height: 4px;
-  }
-  .mdl-demo main > .mdl-layout__tab-panel {
-    padding: 8px;
-    padding-top: 48px;
-  }
-  .mdl-demo .mdl-card {
-    height: auto;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-  }
-  .mdl-demo .mdl-card > * {
-    height: auto;
-  }
-  .mdl-demo .mdl-card .mdl-card__supporting-text {
-    margin: 40px;
-    -webkit-flex-grow: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    padding: 0;
-    color: inherit;
-    width: calc(100% - 80px);
-  }
-  .mdl-demo.mdl-demo .mdl-card__supporting-text h4 {
-    margin-top: 0;
-    margin-bottom: 20px;
-  }
-  .mdl-demo .mdl-card__actions {
-    margin: 0;
-    padding: 4px 40px;
-    color: inherit;
-  }
-  .mdl-demo .mdl-card__actions a {
-    color: #00BCD4;
-    margin: 0;
-  }
-  .mdl-demo .mdl-card__actions a:hover,
-  .mdl-demo .mdl-card__actions a:active {
-    color: inherit;
-    background-color: transparent;
-  }
-  .mdl-demo .mdl-card__supporting-text + .mdl-card__actions {
-    border-top: 1px solid rgba(0, 0, 0, 0.12);
-  }
-  .mdl-demo #add {
-    position: absolute;
-    right: 40px;
-    top: 36px;
-    z-index: 999;
-  }
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <title>Material Design Lite</title>
 
-  .mdl-demo .mdl-layout__content section:not(:last-of-type) {
-    position: relative;
-    margin-bottom: 48px;
-  }
-  .mdl-demo section.section--center {
-    max-width: 860px;
-  }
-  .mdl-demo #features section.section--center {
-    max-width: 620px;
-  }
-  .mdl-demo section > header{
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-  }
-  .mdl-demo section > .section__play-btn {
-    min-height: 200px;
-  }
-  .mdl-demo section > header > .material-icons {
-    font-size: 3rem;
-  }
-  .mdl-demo section > button {
-    position: absolute;
-    z-index: 99;
-    top: 8px;
-    right: 8px;
-  }
-  .mdl-demo section .section__circle {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-justify-content: flex-start;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
-    -webkit-flex-grow: 0;
-    -ms-flex-positive: 0;
-    flex-grow: 0;
-    -webkit-flex-shrink: 1;
-    -ms-flex-negative: 1;
-    flex-shrink: 1;
-  }
-  .mdl-demo section .section__text {
-    -webkit-flex-grow: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    -webkit-flex-shrink: 0;
-    -ms-flex-negative: 0;
-    flex-shrink: 0;
-    padding-top: 8px;
-  }
-  .mdl-demo section .section__text h5 {
-    font-size: inherit;
-    margin: 0;
-    margin-bottom: 0.5em;
-  }
-  .mdl-demo section .section__text a {
-    text-decoration: none;
-  }
-  .mdl-demo section .section__circle-container > .section__circle-container__circle {
-    width: 64px;
-    height: 64px;
-    border-radius: 32px;
-    margin: 8px 0;
-  }
-  .mdl-demo section.section--footer .section__circle--big {
-    width: 100px;
-    height: 100px;
-    border-radius: 50px;
-    margin: 8px 32px;
-  }
-  .mdl-demo .is-small-screen section.section--footer .section__circle--big {
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    margin: 8px 16px;
-  }
-  .mdl-demo section.section--footer {
-    padding: 64px 0;
-    margin: 0 -8px -8px -8px;
-  }
-  .mdl-demo section.section--center .section__text:not(:last-child) {
-    border-bottom: 1px solid rgba(0,0,0,.13);
-  }
-  .mdl-demo .mdl-card .mdl-card__supporting-text > h3:first-child {
-    margin-bottom: 24px;
-  }
-  .mdl-demo .mdl-layout__tab-panel:not(#overview) {
-    background-color: white;
-  }
-  .mdl-demo #features section {
-    margin-bottom: 72px;
-  }
-  .mdl-demo #features h4, #features h5 {
-    margin-bottom: 16px;
-  }
-  .mdl-demo .toc {
-    border-left: 4px solid #C1EEF4;
-    margin: 24px;
-    padding: 0;
-    padding-left: 8px;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-  }
-  .mdl-demo .toc h4 {
-    font-size: 0.9rem;
-    margin-top: 0;
-  }
-  .mdl-demo .toc a {
-    color: #4DD0E1;
-    text-decoration: none;
-    font-size: 16px;
-    line-height: 28px;
-    display: block;
-  }
-  .mdl-demo .mdl-menu__container {
-    z-index: 99;
-  }
-</style>
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+  <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+  <meta name="msapplication-TileColor" content="#3372DF">
+
+  <link rel="shortcut icon" href="images/favicon.png">
+
+  <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+  <!--
+  <link rel="canonical" href="http://www.example.com/">
+  -->
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.cyan-light_blue.min.css">
+  <link rel="stylesheet" href="styles.css">
 
 
 
+  <style>
+    #add {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 40px;
+      z-index: 900;
+    }
+  </style>
+</head>
+<body>
+<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+  <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+    <div class="mdl-layout__header-row">
+      <span class="mdl-layout-title">Home</span>
+      <div class="mdl-layout-spacer"></div>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+        <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+          <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" id="search">
+          <label class="mdl-textfield__label" for="search">Enter your query...</label>
+        </div>
+      </div>
 
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-  <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
-    <div class="mdl-layout--large-screen-only mdl-layout__header-row">
-    </div>
-    <div class="mdl-layout--large-screen-only mdl-layout__header-row">
-      <h3>책 쌓는 서재</h3>
-    </div>
-    <div class="mdl-layout--large-screen-only mdl-layout__header-row">
-    </div>
-    <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
-      <a href="#overview" class="mdl-layout__tab is-active">소설</a>
-      <a href="#features" class="mdl-layout__tab">시</a>
-      <a href="#features" class="mdl-layout__tab">수필</a>
-      <a href="#features" class="mdl-layout__tab">...</a>
-      <a href="#features" class="mdl-layout__tab">...</a>
-      <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp mdl-color--accent show-modal" id="add">
-        <i class="material-icons" role="presentation">add</i>
-        <span class="visuallyhidden">Add</span>
+      <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+        <i class="material-icons">more_vert</i>
       </button>
+
+      <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+        <li class="mdl-menu__item">About</li>
+        <li class="mdl-menu__item">Contact</li>
+        <li class="mdl-menu__item">Legal information</li>
+      </ul>
     </div>
   </header>
-  <main class="mdl-layout__content">
+  <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
 
-    <div class="mdl-layout__tab-panel is-active" id="overview">
+    <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+      <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
+      <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Inbox</a>
+      <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i>Trash</a>
+      <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Spam</a>
+      <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Forums</a>
+      <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Updates</a>
+      <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i>Promos</a>
+      <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">shopping_cart</i>Purchases</a>
+      <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Social</a>
+      <div class="mdl-layout-spacer"></div>
+      <a class="mdl-navigation__link" href="/users/sign_out"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Log out</a>
+    </nav>
+  </div>
+  <main class="mdl-layout__content mdl-color--grey-100 ">
 
-      <dialog class="mdl-dialog">
-        <div class="mdl-dialog__title">
-          <h4>서재에 책 추가하기</h4>
-        </div>
-        <div class="mdl-dialog__content">
+    <div class="mdl-grid1">
 
-          <form  action="/home/write" method="POST" enctype="multipart/form-data">
-            <h5>책 종류</h5>
-            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="type-1">
-              <input type="radio" id="type-1" class="mdl-radio__button" name="type" value="1" checked>
-              <span class="mdl-radio__label">소설</span>
-            </label>
-            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="type-2">
-              <input type="radio" id="type-2" class="mdl-radio__button" name="type" value="2">
-              <span class="mdl-radio__label">시</span>
-            </label>
-            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="type-3">
-              <input type="radio" id="type-3" class="mdl-radio__button" name="type" value="3">
-              <span class="mdl-radio__label">수필</span>
-            </label>
+      <% @drawer_novel.each do |p| %>
 
-            <form  action="/home/search" method="POST" enctype="multipart/form-data">
-
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
-              <input name="title" class="mdl-textfield__input" type="text" id="sample3" value="<% @mtitle%>">
-              <label class="mdl-textfield__label" for="sample3">책 제목</label>
+          <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet align_grid">
+            <div class="mdl-card__title1 mdl-card--expand mdl-color--teal-300">
+              <img src= <%= p.img %> class="test">
             </div>
-
-              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
-                <input name="author" class="mdl-textfield__input" type="text" id="sample3" value="<% @mauthor%>">
-                <label class="mdl-textfield__label" for="sample3">작가명</label>
-              </div>
-
-              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
-                <input name="isbn" class="mdl-textfield__input" type="text" id="sample3">
-                <label class="mdl-textfield__label" for="sample3">ISBN 번호</label>
-              </div>
-
-
-
-              <button type="submit"  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-cell mdl-cell--12-col title_search">전송</button>
-
-            </form>
-
-            <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--12-col">
-
-              <textarea name="content" class="mdl-textfield__input " rows="5" id="sample5"></textarea>
-              <label class="mdl-textfield__label" for="sample5">책에 대한 어떤것이라도 써보세요! 느낀점이라던가, 감명깊었던 장면이라던가, 뭐 이런것들이요^^</label>
+            <div class="mdl-card__title1 mdl-card--expand mdl-color--teal-300" style="padding: 10px;">
+              <h2 class="mdl-card__title-text"><%= p.title %></h2>
             </div>
+            <div class="mdl-card__actions mdl-card--border"></div>
+            <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+              저자 : <%= p.author %><br>장르 : <%= p.type %><br>설 : <%= p.description %><br>
 
-            <br>
-            <h5>책 이미지 업로드</h5>
-            <input type="file" name="pic" accept="image/*">
-            <br>
-
-            <button type="submit"  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-cell mdl-cell--12-col reply_submit">전송</button>
-
-          </form>
-
-        </div>
-
-        <div class="mdl-dialog__actions mdl-dialog__actions--full-width">
-
-        </div>
-      </dialog>
-
-      <script>
-        var dialog = document.querySelector('dialog');
-        var showModalButton = document.querySelector('.show-modal');
-        if (! dialog.showModal) {
-          dialogPolyfill.registerDialog(dialog);
-        }
-        showModalButton.addEventListener('click', function() {
-          dialog.showModal();
-        });
-        dialog.querySelector('.close').addEventListener('click', function() {
-          dialog.close();
-        });
-      </script>
-      <% @drawer_novel.each do |p|%>
-          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-            <header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white" style="background-image: url(<% unless p.img.nil? %>
-                <%= p.img %>
-                <% end %>
-
-                ); background-size: cover">
-
-
-            </header>
-
-
-            <div class="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
-              <div class="mdl-card__supporting-text">
-                <h4><%= p.title %><br>글쓴이 : <%= p.author %><br>작성자 : <%= p.writer %></h4>
-                <%= p.content %>
-              </div>
-              <div class="mdl-card__actions">
-                <a href="#" class="mdl-button">가게 상세 위치</a>
-              </div>
             </div>
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn<%= p.id %>">
-              <i class="material-icons">more_vert</i>
-            </button>
-            <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn<%= p.id %>">
-              <li class="mdl-menu__item">수정</li>
-            </ul>
-          </section>
+            <div class="mdl-card__actions mdl-card--border">
+              <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read More</a>
+            </div>
+          </div>
       <% end %>
 
-
-
-      <section class="section--footer mdl-color--white mdl-grid">
-        <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
-          <div class="section__circle-container__circle mdl-color--accent section__circle--big"></div>
-        </div>
-        <div class="section__text mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
-          <h5>Lorem ipsum dolor sit amet</h5>
-          Qui sint ut et qui nisi cupidatat. Reprehenderit nostrud proident officia exercitation anim et pariatur ex.
-        </div>
-        <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
-          <div class="section__circle-container__circle mdl-color--accent section__circle--big"></div>
-        </div>
-        <div class="section__text mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
-          <h5>Lorem ipsum dolor sit amet</h5>
-          Qui sint ut et qui nisi cupidatat. Reprehenderit nostrud proident officia exercitation anim et pariatur ex.
-        </div>
-      </section>
     </div>
 
-
-    <div class="mdl-layout__tab-panel" id="features">
-      <% @drawer_poet.each do |r|%>
-          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-            <header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white" style="background-image: url(<% unless r.img.nil? %>
-                <%= r.img %>
-                <% end %>
-
-                ); background-size: cover">
-
-
-            </header>
-
-
-            <div class="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
-              <div class="mdl-card__supporting-text">
-                <h4><%= r.title %><br>글쓴이 : <%= r.author %><br>작성자 : <%= r.writer %></h4>
-                <%= r.content %>
-              </div>
-              <div class="mdl-card__actions">
-                <a href="#" class="mdl-button">가게 상세 위치</a>
-              </div>
-            </div>
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn<%= r.id %>">
-              <i class="material-icons">more_vert</i>
-            </button>
-            <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn<%= r.id %>">
-              <li class="mdl-menu__item">수정</li>
-            </ul>
-          </section>
-      <% end %>
-    </div>
-
-    <footer class="mdl-mega-footer">
-      <div align="center">
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- duckplace -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-1202990103689473"
-             data-ad-slot="8908764543"
-             data-ad-format="auto"></ins>
-        <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-      </div>
-      <div class="mdl-mega-footer--middle-section">
-        <div class="mdl-mega-footer--drop-down-section">
-          <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
-          <h1 class="mdl-mega-footer--heading">제작 : Bada</h1>
-
-        </div>
-
-      </div>
-      <div class="mdl-mega-footer--bottom-section">
-        <div class="mdl-logo">
-          <h1 class="mdl-mega-footer--heading"><img src='https://s3.ap-northeast-2.amazonaws.com/likelionfile/uploads/logo_orenge.png?X-Amz-Date=20160522T155500Z&X-Amz-Expires=300&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=7d46960b144320dfc5ce8b26f5f0478b438b22a05fc50f6013c596c6ccc8f2b8&X-Amz-Credential=ASIAJUHJNVFQ7BIBHDLQ/20160522/ap-northeast-2/s3/aws4_request&X-Amz-SignedHeaders=Host&x-amz-security-token=FQoDYXdzECwaDMckTcRO2karCenY1iLHAazUlKeCS4ByjW2keMVhOdVGNSdy0pobNPSb6K/e363peh9y2kpKaXm3umWHj/e6xl%2BJwG7zNbu35z8CNah7oBICzQDoHHw%2Bg5gWgZNGWGof3YVkxeF7/mfS70ohBW4aCwv5CfzQ6sYO7V5CWZeVUl2Dbyg4tCXPS3hwsrbypc3%2B5tHtcOV4Ml1Y3tkDHeeKtBKSEu6u0wBoZ7WSXgygewfSl7Ax64SjkvMkVd1nzQI4AyPzGffT/3Ifp3cYLCm1UM00qNOO4SoopJSGugU%3D') alt="이미지" height="40" width="auto"></h1>
-        </div>
-
-      </div>
-    </footer>
   </main>
 </div>
 
+
+
+
+
+<a target="_blank" id="show-dialog" class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp mdl-color--accent mdl-color-text--white">
+  <i class="material-icons" role="presentation">add</i>
+  <span class="visuallyhidden">Add</span>
+</a>
+
+
+<dialog class="mdl-dialog">
+  <h4 class="mdl-dialog__title">책 이름을 검색해주세요</h4>
+
+  <div class="mdl-dialog__content">
+    <form action="/home/search" method="GET">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input name="title" class="mdl-textfield__input" type="text" id="sample3">
+        <label class="mdl-textfield__label" for="sample3">책 제목</label>
+      </div>
+      <button type="submit" id="test-dialog" class="mdl-button mdl-button--primary">검색</button>
+      <button type="button" class="mdl-button close">닫기</button>
+    </form>
+  </div>
+
+  <!--
+    <div class="mdl-dialog__actions">
+      <button type="submit" class="mdl-button">Agree</button>
+      <button type="button" class="mdl-button close">Disagree</button>
+    </div>-->
+</dialog>
+<script>
+  var dialog = document.querySelector('dialog');
+  var showDialogButton = document.querySelector('#show-dialog');
+  if (! dialog.showModal) {
+    dialogPolyfill.registerDialog(dialog);
+  }
+  showDialogButton.addEventListener('click', function() {
+    dialog.showModal();
+  });
+  dialog.querySelector('.close').addEventListener('click', function() {
+    dialog.close();
+  });
+</script>
+
+
+
+
+
+
+
+
+
+<script src="https://www.gstatic.com/firebasejs/3.0.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.0.5/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.0.5/firebase-database.js"></script>
+
+
+<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCoBGLCQKFyJQuvQ8KnrRdFE6KzqzyvNUQ",
+    authDomain: "project-subculture.firebaseapp.com",
+    databaseURL: "https://project-subculture.firebaseio.com",
+    storageBucket: "",
+  };
+  firebase.initializeApp(config);
+</script>
+
+
 <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+</body>
+</html>
+

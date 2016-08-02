@@ -15,14 +15,14 @@ ActiveRecord::Schema.define(version: 20160524141423) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title"
-    t.integer  "isbn"
     t.string   "type"
     t.string   "author"
     t.string   "writer"
+    t.text     "description"
     t.text     "content"
     t.string   "img"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "searches", force: :cascade do |t|

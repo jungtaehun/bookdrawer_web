@@ -3,10 +3,10 @@ class CreateBooks < ActiveRecord::Migration
     create_table :books do |t|
 
       t.string :title
-      t.integer :isbn
       t.string :type
       t.string :author
       t.string :writer
+      t.text :description
       t.text :content
       t.string :img
 
