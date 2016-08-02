@@ -36,7 +36,7 @@ class HomeController < ApplicationController
     book.author = xml_doc.xpath("//item //author")[t].inner_text
     book.writer = "test"
     book.content = "테스트 콘텐츠"
-    book.description = xml_doc.xpath("//item //description")[t].inner_text
+    book.description = xml_doc.xpath("//item //description")[t].inner_text.delete('<b>').delete('</b>')
 
 
     if xml_doc.xpath("//item //image")[t].inner_text == ""
