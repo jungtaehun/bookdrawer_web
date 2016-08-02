@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   get 'home/create'
 
-  post 'home/write'
+  post 'home/write' => "home#create"
 
 
 

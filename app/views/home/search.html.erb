@@ -9,6 +9,7 @@
   }
 </style>
 <form name="select" id="select" action="/home/write" method="post" enctype="multipart/form-data">
+  <input type="hidden" name="search_title" value=<%= @title %>>
   <ul class="demo-list-control mdl-list">
 
     <% @dtest.each_with_index do |x, i|%>
@@ -20,7 +21,7 @@
     </span>
           <span class="mdl-list__item-secondary-action">
         <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-<%= i %>">
-          <input type="radio" name="chk_select" id="list-option-<%= i %>" class="mdl-radio__button" name="options" value=<%= i %>/>
+          <input type="radio" name="chk_select" id="list-option-<%= i %>" class="mdl-radio__button" name="options" value=<%= i %> />
         </label>
     </span>
         </li>
